@@ -1,5 +1,5 @@
 <template>
-  <div class="square">
+  <div class="square" v-on:click='makeYourMove'>
     {{ square }}
   </div>
 </template>
@@ -9,6 +9,11 @@ export default {
   name: 'Square',
   props: {
     square: String
+  },
+  methods: {
+    makeYourMove: function () {
+      this.$emit('updateArray', this.$el.id)
+    }
   }
 }
 </script>

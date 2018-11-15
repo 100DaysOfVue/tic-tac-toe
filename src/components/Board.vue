@@ -1,10 +1,15 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <!-- <p> {{ squares }} </p> -->
     <div class="board">
-      <div v-for="(square, index) in squares" :key="index" >
-        <Square :square="square" />
-      </div>
+      <Square
+        v-for="(square, index) in squares"
+        :key="index"
+        :id = "index"
+        :square="square"
+        v-on:updateArray="updateArray"
+      />
     </div>
   </div>
 </template>
@@ -20,7 +25,12 @@ export default {
   components: { Square },
   data  () {
     return {
-      squares: Array(9).fill(null)
+      squares: Array(9).fill('')
+    }
+  },
+  methods: {
+    updateArray: function (index) {
+      this.squares.splice(index, 1, 'X')
     }
   }
 }
