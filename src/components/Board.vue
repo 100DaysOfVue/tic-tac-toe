@@ -2,6 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <!-- <p> {{ squares }} </p> -->
+    <p>Next Player: {{ this.turn ? 'X' : 'O'}}</p>
     <div class="board">
       <Square
         v-for="(square, index) in squares"
@@ -25,12 +26,17 @@ export default {
   components: { Square },
   data  () {
     return {
-      squares: Array(9).fill('')
+      squares: Array(9).fill(''),
+      turn: true
     }
   },
   methods: {
+    splicing: function (index, letter) {
+      this.squares.splice(index, 1, letter)
+    },
     updateArray: function (index) {
-      this.squares.splice(index, 1, 'X')
+      this.turn ? this.splicing(index, 'X') : this.splicing(index, 'O')
+      this.turn = !this.turn
     }
   }
 }
