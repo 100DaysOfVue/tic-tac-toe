@@ -8,10 +8,14 @@
 export default {
   name: 'Square',
   props: {
-    square: String
+    square: String,
+    winner: String
   },
   methods: {
     makeYourMove: function () {
+      if (this.winner){
+        return
+      }
       this.$emit('updateArray', this.$el.id)
     }
   }
