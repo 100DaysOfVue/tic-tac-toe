@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     makeYourMove: function () {
-      if (this.winner){
+      if (this.winner || this.square) {
         return
       }
       this.$emit('updateArray', this.$el.id)

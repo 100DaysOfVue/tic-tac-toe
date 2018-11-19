@@ -42,8 +42,24 @@ export default {
       this.turn ? this.splicing(index, 'X') : this.splicing(index, 'O')
       this.turn = !this.turn
       this.turnsPlayed++
+      // call the computerTurn function
+      this.computerTurn(this.squares)
     },
 
+    // computerTurn function will take
+    computerTurn: function (grid) {
+      if (this.turnsPlayed === 1) {
+        this.randomPlay(grid)
+      } else {
+        console.log(`turns played is more than 1`)
+      }
+      this.turn = !this.turn
+      this.turnsPlayed++
+    },
+    randomPlay: function (grid) {
+      const randomIndex = Math.floor(Math.random() * 9)
+      grid.splice(randomIndex, 1, 'O')
+    },
     theWinnerIs: function (arr) {
       // let arr = this.squares
       const lines = [
