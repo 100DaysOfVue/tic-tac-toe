@@ -28,7 +28,7 @@ export default {
   components: { Square },
   data  () {
     return {
-      squares: Array(9).fill(''),
+      squares: Array(9).fill(null),
       turn: true,
       turnsPlayed: 0,
       winner: ''
@@ -90,13 +90,13 @@ export default {
         // check horizontal lines first
         for (let i = 0; i < horizontalLines.length; i++) {
           const [a, b] = horizontalLines[i]
-            console.log('horizontal lines checked')
+          console.log('horizontal lines checked')
           if (grid[a] && grid[a] === grid[b]) {
             if ([0, 3, 6].includes(i)) {
               grid.splice(a + 2, 1, 'O')
             } else if ([1, 4, 7].includes(i)) {
               grid.splice(a - 1, 1, 'O')
-            } else if([2, 5, 8].includes(i)) {
+            } else if ([2, 5, 8].includes(i)) {
               grid.splice(a + 1, 1, 'O')
             }
           }
@@ -140,7 +140,11 @@ export default {
     },
     randomPlay: function (grid) {
       const randomIndex = Math.floor(Math.random() * 9)
-      grid.splice(randomIndex, 1, 'O')
+      if (grid[randomIndex]) {
+        this.randomPlay(grid)
+      } else {
+        grid.splice(randomIndex, 1, 'O')
+      }
     },
     theWinnerIs: function (arr) {
       // let arr = this.squares
