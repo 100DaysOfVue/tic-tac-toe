@@ -35,13 +35,17 @@ export default {
     }
   },
   methods: {
+    // this function will change this.turn and add 1 to turns played
     turnEnd: function () {
       this.turn = !this.turn
       this.turnsPlayed++
     },
+    // for shorting splice function in updateArray
     splicing: function (index, letter) {
       this.squares.splice(index, 1, letter)
     },
+    // goign to add 'X' to squares array in user turn
+    // one the turn end it going to call the computer turn function
     updateArray: function (index) {
       this.turn ? this.splicing(index, 'X') : this.splicing(index, 'O')
       this.turnEnd()
@@ -49,7 +53,10 @@ export default {
       this.computerTurn(this.squares)
     },
 
-    // computerTurn function will take
+    // computerTurn function going to take the squares as parameter
+    // it going to use it to iterate over and depending if the elements is not null
+    // if is the first  turn of computer his move going to be random with randomPlay function
+    // else going to check if the player has a win move to block him or going to move randomly
     computerTurn: function (grid) {
       if (this.turnsPlayed === 1) {
         this.randomPlay(grid)
@@ -138,6 +145,9 @@ export default {
       }
       this.turnEnd()
     },
+    // random play that the computer going to use for move radomly
+    // this function will receive as parameter a grid that result in the squares array
+    // only if the squares in the randum index is null will replace with 'O'
     randomPlay: function (grid) {
       const randomIndex = Math.floor(Math.random() * 9)
       if (grid[randomIndex]) {
@@ -146,8 +156,11 @@ export default {
         grid.splice(randomIndex, 1, 'O')
       }
     },
+    // this function going to calculate the winner iterating over an array (lines)
+    // created on it which going to be the indexes combination to win the game
+    // also going to take an array (this.squares) as parameter
+    // to check the lines combination to return who won
     theWinnerIs: function (arr) {
-      // let arr = this.squares
       const lines = [
         [0, 1, 2],
         [3, 4, 5],
