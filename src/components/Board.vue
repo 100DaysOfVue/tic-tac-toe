@@ -19,6 +19,8 @@
 
 <script>
 import Square from './Square.vue'
+// this cases will be used in the checks functions to call the match case
+import { cases } from '../cases'
 
 export default {
   name: 'Board',
@@ -61,89 +63,82 @@ export default {
       if (this.turnsPlayed === 1) {
         this.randomPlay(grid)
       } else {
-        // horizontal lines
-        const horizontalLines = [
-          [0, 1],
-          [1, 2],
-          [0, 2],
-          [3, 4],
-          [4, 5],
-          [3, 5],
-          [6, 7],
-          [7, 8],
-          [6, 8]
-        ]
-        // vertical lines
-        const verticalLines = [
-          [0, 3],
-          [3, 6],
-          [0, 6],
-          [1, 4],
-          [4, 7],
-          [1, 7],
-          [2, 5],
-          [5, 8],
-          [2, 8]
-        ]
-        // diagonal lines
-        const diagonalLines = [
-          [0, 4],
-          [4, 8],
-          [0, 8],
-          [2, 4],
-          [4, 6],
-          [2, 6]
-        ]
         // check horizontal lines first
-        for (let i = 0; i < horizontalLines.length; i++) {
-          const [a, b] = horizontalLines[i]
-          console.log('horizontal lines checked')
-          if (grid[a] && grid[a] === grid[b]) {
-            if ([0, 3, 6].includes(i)) {
-              grid.splice(a + 2, 1, 'O')
-            } else if ([1, 4, 7].includes(i)) {
-              grid.splice(a - 1, 1, 'O')
-            } else if ([2, 5, 8].includes(i)) {
-              grid.splice(a + 1, 1, 'O')
-            }
-          }
-        }
+        this.checkHorizontal(grid)
         // check vertical lines second
-        for (let i = 0; i < verticalLines.length; i++) {
-          console.log('vertical lines checked')
-          const [a, b] = verticalLines[i]
-          if (grid[a] && grid[a] === grid[b]) {
-            if ([0, 3, 6].includes(i)) {
-              grid.splice(b + 3, 1, 'O')
-            } else if ([1, 4, 7].includes(i)) {
-              grid.splice(a - 3, 1, 'O')
-            } else {
-              grid.splice(a + 3, 1, 'O')
-            }
-          }
-        }
+        this.checkVertical(grid)
         // check diagonal lines
-        for (let i = 0; i < diagonalLines.length; i++) {
-          console.log('diagonal lines checked')
-          const [a, b] = diagonalLines[i]
-          if (grid[a] && grid[a] === grid[b]) {
-            if (i === 0) {
-              grid.splice(b + 4, 1, 'O')
-            } else if (i === 1) {
-              grid.splice(a - 4, 1, 'O')
-            } else if (i === 2) {
-              grid.splice(a + 4, 1, 'O')
-            } else if (i === 3) {
-              grid.splice(b + 2, 1, 'O')
-            } else if (i === 4) {
-              grid.splice(a - 2, 1, 'O')
-            } else {
-              grid.splice(a + 2, 1, 'O')
-            }
-          }
-        }
+        this.checkDiagonal(grid)
       }
       this.turnEnd()
+    },
+    // check functions begin here
+    // going to receive the grid, then it'll be pased to match case
+    checkHorizontal: function (grid) {
+      // horizontal lines
+      const horizontalLines = [
+        [0, 1],
+        [1, 2],
+        [0, 2],
+        [3, 4],
+        [4, 5],
+        [3, 5],
+        [6, 7],
+        [7, 8],
+        [6, 8]
+      ]
+      for (let i = 0; i < horizontalLines.length; i++) {
+        console.log('horizontal lines checked')
+        const [a, b] = horizontalLines[i]
+        let replaceCase = cases.horizontalCases[i]
+        if (grid[a] && grid[a] === grid[b]) {
+          replaceCase(grid)
+          break
+        }
+      }
+    },
+    checkVertical: function (grid) {
+      // vertical lines combination
+      const verticalLines = [
+        [0, 3],
+        [3, 6],
+        [0, 6],
+        [1, 4],
+        [4, 7],
+        [1, 7],
+        [2, 5],
+        [5, 8],
+        [2, 8]
+      ]
+      for (let i = 0; i < verticalLines.length; i++) {
+        console.log('vertical lines checked')
+        const [a, b] = verticalLines[i]
+        let replaceCase = cases.verticalCases[i]
+        if (grid[a] && grid[a] === grid[b]) {
+          replaceCase(grid)
+          break
+        }
+      }
+    },
+    checkDiagonal: function (grid) {
+      // diagonal lines
+      const diagonalLines = [
+        [0, 4],
+        [4, 8],
+        [0, 8],
+        [2, 4],
+        [4, 6],
+        [2, 6]
+      ]
+      for (let i = 0; i < diagonalLines.length; i++) {
+        console.log('diagonal lines checked')
+        const [a, b] = diagonalLines[i]
+        let replaceCase = cases.diagonalCases[i]
+        if (grid[a] && grid[a] === grid[b]) {
+          replaceCase(grid)
+          break
+        }
+      }
     },
     // random play that the computer going to use for move radomly
     // this function will receive as parameter a grid that result in the squares array
