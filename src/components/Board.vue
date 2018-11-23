@@ -33,7 +33,63 @@ export default {
       squares: Array(9).fill(null),
       turn: true,
       turnsPlayed: 0,
-      winner: ''
+      winner: '',
+      linesToCheck: [
+        [0, 1],
+        [1, 2],
+        [0, 2],
+        [3, 4],
+        [4, 5],
+        [3, 5],
+        [6, 7],
+        [7, 8],
+        [6, 8],
+        // verical lines
+        [0, 3],
+        [3, 6],
+        [0, 6],
+        [1, 4],
+        [4, 7],
+        [1, 7],
+        [2, 5],
+        [5, 8],
+        [2, 8],
+        // diagonal lines
+        [0, 4],
+        [4, 8],
+        [0, 8],
+        [2, 4],
+        [4, 6],
+        [2, 6]
+      ],
+      lines: [
+        [0, 1],
+        [1, 2],
+        [0, 2],
+        [3, 4],
+        [4, 5],
+        [3, 5],
+        [6, 7],
+        [7, 8],
+        [6, 8],
+        // verical lines
+        [0, 3],
+        [3, 6],
+        [0, 6],
+        [1, 4],
+        [4, 7],
+        [1, 7],
+        [2, 5],
+        [5, 8],
+        [2, 8],
+        // diagonal lines
+        [0, 4],
+        [4, 8],
+        [0, 8],
+        [2, 4],
+        [4, 6],
+        [2, 6]
+      ]
     }
   },
   methods: {
@@ -63,79 +119,19 @@ export default {
       if (this.turnsPlayed === 1) {
         this.randomPlay(grid)
       } else {
-        // check horizontal lines first
-        this.checkHorizontal(grid)
-        // check vertical lines second
-        this.checkVertical(grid)
-        // check diagonal lines
-        this.checkDiagonal(grid)
+        this.checkLines(grid)
       }
       this.turnEnd()
     },
-    // check functions begin here
-    // going to receive the grid, then it'll be pased to match case
-    checkHorizontal: function (grid) {
-      // horizontal lines
-      const horizontalLines = [
-        [0, 1],
-        [1, 2],
-        [0, 2],
-        [3, 4],
-        [4, 5],
-        [3, 5],
-        [6, 7],
-        [7, 8],
-        [6, 8]
-      ]
-      for (let i = 0; i < horizontalLines.length; i++) {
-        console.log('horizontal lines checked')
-        const [a, b] = horizontalLines[i]
-        let replaceCase = cases.horizontalCases[i]
-        if (grid[a] && grid[a] === grid[b]) {
-          replaceCase(grid)
-          break
-        }
-      }
-    },
-    checkVertical: function (grid) {
-      // vertical lines combination
-      const verticalLines = [
-        [0, 3],
-        [3, 6],
-        [0, 6],
-        [1, 4],
-        [4, 7],
-        [1, 7],
-        [2, 5],
-        [5, 8],
-        [2, 8]
-      ]
-      for (let i = 0; i < verticalLines.length; i++) {
-        console.log('vertical lines checked')
-        const [a, b] = verticalLines[i]
-        let replaceCase = cases.verticalCases[i]
-        if (grid[a] && grid[a] === grid[b]) {
-          replaceCase(grid)
-          break
-        }
-      }
-    },
-    checkDiagonal: function (grid) {
-      // diagonal lines
-      const diagonalLines = [
-        [0, 4],
-        [4, 8],
-        [0, 8],
-        [2, 4],
-        [4, 6],
-        [2, 6]
-      ]
-      for (let i = 0; i < diagonalLines.length; i++) {
-        console.log('diagonal lines checked')
-        const [a, b] = diagonalLines[i]
-        let replaceCase = cases.diagonalCases[i]
-        if (grid[a] && grid[a] === grid[b]) {
-          replaceCase(grid)
+    // check functions going to receive the grid, then it'll be pased to match case
+    checkLines: function (grid) {
+      // console.log(this.lines)
+      for (let i = 0; i < this.linesToCheck.length; i++) {
+        const [a, b] = this.linesToCheck[i]
+        let replaceCase = cases.winCases[i]
+        if (grid[a] && grid[a] === grid[b] && this.lines[i]) {
+          this.lines.splice(i, 1, null)
+          replaceCase(grid, this)
           break
         }
       }
