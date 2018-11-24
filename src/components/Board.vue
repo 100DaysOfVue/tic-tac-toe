@@ -125,13 +125,16 @@ export default {
     },
     // check functions going to receive the grid, then it'll be pased to match case
     checkLines: function (grid) {
-      // console.log(this.lines)
       for (let i = 0; i < this.linesToCheck.length; i++) {
         const [a, b] = this.linesToCheck[i]
-        let replaceCase = cases.winCases[i]
+        const replaceCase = cases.winCases[i]
+        console.log(this.linesToCheck.length)
         if (grid[a] && grid[a] === grid[b] && this.lines[i]) {
           this.lines.splice(i, 1, null)
           replaceCase(grid, this)
+          break
+        } else if (i === this.linesToCheck.length - 1) {
+          this.randomPlay(grid)
           break
         }
       }
