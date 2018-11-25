@@ -70,7 +70,7 @@ const cases = {
       grid[6] ? _this.checkLines(grid) : grid.splice(6, 1, 'O')
     },
     22: function (grid, _this) {
-      grid[3] ? _this.checkLines(grid) : grid.splice(3, 1, 'O')
+      grid[2] ? _this.checkLines(grid) : grid.splice(2, 1, 'O')
     },
     23: function (grid, _this) {
       grid[4] ? _this.checkLines(grid) : grid.splice(4, 1, 'O')
