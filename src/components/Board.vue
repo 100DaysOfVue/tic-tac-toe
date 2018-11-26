@@ -128,12 +128,11 @@ export default {
       for (let i = 0; i < this.linesToCheck.length; i++) {
         const [a, b] = this.linesToCheck[i]
         const replaceCase = cases.winCases[i]
-        console.log(this.linesToCheck.length)
         if (grid[a] && grid[a] === grid[b] && this.lines[i]) {
           this.lines.splice(i, 1, null)
           replaceCase(grid, this)
           break
-        } else if (i === this.linesToCheck.length - 1) {
+        } else if (i === this.linesToCheck.length - 1 && this.turnsPlayed < 9) {
           this.randomPlay(grid)
           break
         }
@@ -169,9 +168,11 @@ export default {
         const [a, b, c] = lines[i]
         if (arr[a] && arr[a] === arr[b] && arr[a] === arr[c]) {
           return arr[a]
+        } else if (this.turnsPlayed >= 9) {
+          return 'Tie Game'
         }
       }
-      return null
+      return ''
     }
   },
   updated: function () {
