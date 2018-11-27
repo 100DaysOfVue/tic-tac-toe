@@ -1,9 +1,11 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <!-- <p> {{ squares }} </p> -->
-    <h2 v-if='winner'>The winner is {{ winner }}</h2>
-    <h3 v-else>Next Player: {{ this.turn ? 'X' : 'O'}}</h3>
+    <h3>Next Player: {{ this.turn ? 'X' : 'O'}}</h3>
+    <div class="endGame" v-if="winner">
+      <h2 class="text" v-if="winner === 'Tie Game'">{{ winner }}</h2>
+      <h2 class="text" v-else>Winner: {{ winner }}</h2>
+    </div>
     <div class="board">
       <Square
         v-for="(square, index) in squares"
@@ -182,5 +184,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->

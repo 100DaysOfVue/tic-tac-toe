@@ -32,6 +32,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #540c0cc4;
+  height: 100%;
 }
 .hello{
   display: flex;
@@ -69,5 +70,24 @@ body {
 }
 .square:nth-child(3n+3){
   border-right: none;
+}
+.endGame{
+  z-index: 1;
+  position: absolute;
+  top: calc(50% - 125px);
+  left: calc(50% - 125px);
+  width: 250px;
+  height: 200px;
+  background: rgb(245, 208, 204);
+  opacity: 0.85;
+  font-size: 40px;
+  border-radius: 15px;
+}
+.text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  height: 100%;
 }
 </style>
