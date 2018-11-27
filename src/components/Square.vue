@@ -21,11 +21,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.square{
-    width: 100px;
-    height: 100px;
-    border: 1px rosybrown solid;
-  }
-</style>

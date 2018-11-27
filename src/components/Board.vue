@@ -184,18 +184,3 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .hello{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .board{
-    width: 306px;
-    height: 306px;
-    border: 2px mistyrose solid;
-    display: flex;
-    flex-wrap: wrap;
-  }
-</style>
