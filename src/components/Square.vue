@@ -1,6 +1,6 @@
 <template>
   <div class="square" v-on:click='makeYourMove'>
-    {{ square }}
+    <span>{{ square }}</span>
   </div>
 </template>
 

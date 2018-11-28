@@ -24,7 +24,8 @@ html, body {
 }
 body {
   background-color: #D1FAFF;
-  background-image: radial-gradient(ellipse at center, #ffffff 1%,#f4f4f4 19%,#f2f4f4 19%,#c1e7f1 50%,#9dd8ea 80%,#a9c8e5 93%);
+  background-image: radial-gradient(ellipse at center, #ffffff 1%,#f4f4f4 19%,
+                                    #f2f4f4 19%,#c1e7f1 50%,#9dd8ea 80%,#a9c8e5 93%);
 }
 #app {
   font-family: 'Rubik', sans-serif;
@@ -48,6 +49,11 @@ body {
   font-size: 20px;
   box-shadow: 0 1px 1px 0 rgb(136, 157, 160);
   font-weight: bold;
+  transition: .2s;
+  outline: 0;
+}
+.btn:active {
+  transform: scale(.9);
 }
 .board{
   margin-top: 30px;

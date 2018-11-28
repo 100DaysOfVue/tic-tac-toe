@@ -2,13 +2,15 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h3>Next Player: {{ this.turn ? 'X' : 'O'}}</h3>
-    <div class="endGame" v-if="winner" @click="reset">
-      <h2 class="text" v-if="winner === 'Tie Game'">{{ winner }}</h2>
-      <h2 class="text" v-else>Winner: {{ winner }}</h2>
-    </div>
+    <transition name="slide-fade">
+      <div class="endGame" v-if="winner" @click="reset">
+        <h2 class="text" v-if="winner === 'Tie Game'">{{ winner }}</h2>
+        <h2 class="text" v-else>Winner: {{ winner }}</h2>
+      </div>
+    </transition>
     <button @click="reset" class="btn">Replay</button>
     <div class="board">
-      <Square
+      <square
         v-for="(square, index) in squares"
         :key="index+1"
         :id = "index"
@@ -253,3 +255,20 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.slide-fade-enter-active{
+  transition: all .3s ease-in;
+}
+.slide-fade-leave-active{
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter{
+  transform: translateX(10px);
+  opacity: 0;
+}
+.slide-fade-leave-to{
+  transform: translateX(-10px);
+  opacity: 0;
+}
+</style>
