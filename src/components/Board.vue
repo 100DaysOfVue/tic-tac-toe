@@ -2,10 +2,11 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h3>Next Player: {{ this.turn ? 'X' : 'O'}}</h3>
-    <div class="endGame" v-if="winner">
+    <div class="endGame" v-if="winner" @click="reset">
       <h2 class="text" v-if="winner === 'Tie Game'">{{ winner }}</h2>
       <h2 class="text" v-else>Winner: {{ winner }}</h2>
     </div>
+    <button @click="reset" class="btn">Replay</button>
     <div class="board">
       <Square
         v-for="(square, index) in squares"
@@ -175,6 +176,74 @@ export default {
         }
       }
       return ''
+    },
+    defaultData: function () {
+      return {
+        squares: Array(9).fill(null),
+        turn: true,
+        turnsPlayed: 0,
+        winner: '',
+        linesToCheck: [
+          [0, 1],
+          [1, 2],
+          [0, 2],
+          [3, 4],
+          [4, 5],
+          [3, 5],
+          [6, 7],
+          [7, 8],
+          [6, 8],
+          // verical lines
+          [0, 3],
+          [3, 6],
+          [0, 6],
+          [1, 4],
+          [4, 7],
+          [1, 7],
+          [2, 5],
+          [5, 8],
+          [2, 8],
+          // diagonal lines
+          [0, 4],
+          [4, 8],
+          [0, 8],
+          [2, 4],
+          [4, 6],
+          [2, 6]
+        ],
+        lines: [
+          [0, 1],
+          [1, 2],
+          [0, 2],
+          [3, 4],
+          [4, 5],
+          [3, 5],
+          [6, 7],
+          [7, 8],
+          [6, 8],
+          // verical lines
+          [0, 3],
+          [3, 6],
+          [0, 6],
+          [1, 4],
+          [4, 7],
+          [1, 7],
+          [2, 5],
+          [5, 8],
+          [2, 8],
+          // diagonal lines
+          [0, 4],
+          [4, 8],
+          [0, 8],
+          [2, 4],
+          [4, 6],
+          [2, 6]
+        ]
+      }
+    },
+    reset: function () {
+      const defaultD = this.defaultData()
+      Object.assign(this.$data, defaultD)
     }
   },
   updated: function () {

@@ -39,8 +39,18 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
+.btn{
+  background-color: rgb(199, 223, 226);
+  border-radius: 5px;
+  border: none;
+  color: #540c0cc4;
+  padding: 11px 5px;
+  font-size: 20px;
+  box-shadow: 0 1px 1px 0 rgb(136, 157, 160);
+  font-weight: bold;
+}
 .board{
+  margin-top: 30px;
   width: 308px;
   height: 308px;
   display: flex;
@@ -74,7 +84,7 @@ body {
 .endGame{
   z-index: 1;
   position: absolute;
-  top: calc(50% - 125px);
+  top: calc(40%);
   left: calc(50% - 125px);
   width: 250px;
   height: 200px;
@@ -82,6 +92,7 @@ body {
   opacity: 0.85;
   font-size: 40px;
   border-radius: 15px;
+  cursor: pointer;
 }
 .text{
   display: flex;
