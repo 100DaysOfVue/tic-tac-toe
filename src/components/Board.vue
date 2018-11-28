@@ -112,8 +112,14 @@ export default {
     updateArray: function (index) {
       this.turn ? this.splicing(index, 'X') : this.splicing(index, 'O')
       this.turnEnd()
+      // call theWinnerIs function to verify is there is not a winner yet
+      this.winner = this.theWinnerIs(this.squares)
       // call the computerTurn function
-      this.computerTurn(this.squares)
+      if (!this.winner) {
+        this.computerTurn(this.squares)
+        // Call theWinnerIs function again to check if computer won
+        this.winner = this.theWinnerIs(this.squares)
+      }
     },
 
     // computerTurn function going to take the squares as parameter
@@ -246,11 +252,6 @@ export default {
     reset: function () {
       const defaultD = this.defaultData()
       Object.assign(this.$data, defaultD)
-    }
-  },
-  updated: function () {
-    if (this.turnsPlayed > 4) {
-      this.winner = this.theWinnerIs(this.squares)
     }
   }
 }
