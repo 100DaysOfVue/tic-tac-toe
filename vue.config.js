@@ -1,6 +1,6 @@
 // vue.config.js
 module.exports = {
   baseUrl: process.env.NODE_ENV === 'production'
-    ? '/tic-tac-toe'
+    ? '/https://github.com/100DaysOfVue/tic-tac-toe'
     : '/'
 }
