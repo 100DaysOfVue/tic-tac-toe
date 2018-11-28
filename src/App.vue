@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Board msg="Tic Tac Toe Time 😁"/>
+    <Board msg="Tic Tac Toe Time!!"/>
   </div>
 </template>
 

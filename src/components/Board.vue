@@ -179,9 +179,10 @@ export default {
         const [a, b, c] = lines[i]
         if (arr[a] && arr[a] === arr[b] && arr[a] === arr[c]) {
           return arr[a]
-        } else if (this.turnsPlayed >= 9) {
-          return 'Tie Game'
         }
+      }
+      if (this.turnsPlayed >= 9 && !this.winner) {
+        return 'Tie Game'
       }
       return ''
     },
